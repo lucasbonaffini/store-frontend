@@ -7,7 +7,7 @@ export const useCart = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state: RootState) => state.cart);
 
-  // Funciones para interactuar con el carrito
+  // Functions to interact with the cart
   const addItemToCart = (product: Product, quantity: number = 1) => {
     dispatch(addToCart({ product, quantity }));
   };
@@ -24,7 +24,7 @@ export const useCart = () => {
     dispatch(clearCart());
   };
 
-  // Cálculos adicionales
+  // Additional calculations
   const getItemQuantity = (productId: number) => {
     const item = cart.items.find(item => item.id === productId);
     return item ? item.quantity : 0;

@@ -1,64 +1,64 @@
 # FakeStore
 
-Una tienda online de productos con React, Redux Toolkit, Firebase y Chakra UI.
+An online product store built with React, Redux Toolkit, Firebase and Chakra UI.
 
-## Características
+## Features
 
-- Catálogo de productos con buscador
-- Carrito de compras
-- Proceso de checkout
-- Almacenamiento de órdenes en Firebase
-- Diseño responsive con Chakra UI
+- Product catalog with search functionality
+- Shopping cart
+- Checkout process
+- Order storage in Firebase
+- Responsive design with Chakra UI
 
-## Requisitos previos
+## Prerequisites
 
-- Node.js (versión 16 o superior)
-- npm o yarn
-- Cuenta de Firebase
-- Cuenta de Vercel (para despliegue)
+- Node.js (version 16 or higher)
+- npm or yarn
+- Firebase account
+- Vercel account (for deployment)
 
-## Configuración de Firebase
+## Firebase Setup
 
-1. Crea un proyecto en [Firebase Console](https://console.firebase.google.com/)
-2. Crea una aplicación web en tu proyecto
-3. Habilita Firestore Database en tu proyecto
-4. Copia las credenciales de configuración
-5. Crea un archivo `.env` en la raíz del proyecto basado en `.env.example`
-6. Completa las variables de entorno con tus credenciales de Firebase
+1. Create a project in [Firebase Console](https://console.firebase.google.com/)
+2. Create a web application in your project
+3. Enable Firestore Database in your project
+4. Copy the configuration credentials
+5. Create a `.env` file in the project root based on `.env.example`
+6. Fill in the environment variables with your Firebase credentials
 
-## Instalación local
+## Local Installation
 
 ```bash
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Iniciar servidor de desarrollo
+# Start development server
 npm run dev
 ```
 
-## Despliegue en Vercel
+## Deployment on Vercel
 
-1. Crea una cuenta en [Vercel](https://vercel.com/)
-2. Instala la CLI de Vercel `npm install -g vercel`
-3. Ejecuta `vercel login` y sigue las instrucciones
-4. Desde la raíz del proyecto, ejecuta `vercel`
-5. Configura las variables de entorno en el dashboard de Vercel (desde las que tienes en .env)
-6. Para actualizar tu aplicación después de cambios, ejecuta `vercel --prod`
+1. Create an account on [Vercel](https://vercel.com/)
+2. Install the Vercel CLI `npm install -g vercel`
+3. Run `vercel login` and follow the instructions
+4. From the project root, run `vercel`
+5. Configure the environment variables in the Vercel dashboard (from those you have in .env)
+6. To update your application after changes, run `vercel --prod`
 
-También puedes desplegar directamente conectando tu repositorio de GitHub a Vercel para despliegues automáticos.
+You can also deploy directly by connecting your GitHub repository to Vercel for automatic deployments.
 
-## Estructura del proyecto
+## Project Structure
 
-- `/src/api`: Configuración y endpoints de API
-- `/src/assets`: Recursos estáticos
-- `/src/components`: Componentes reutilizables
-- `/src/firebase`: Configuración de Firebase
-- `/src/hooks`: Hooks personalizados
-- `/src/pages`: Páginas de la aplicación
-- `/src/services`: Servicios para datos (productos, carrito, órdenes)
-- `/src/store`: Estado global con Redux Toolkit
-- `/src/types`: Tipos de TypeScript
+- `/src/api`: API configuration and endpoints
+- `/src/assets`: Static resources
+- `/src/components`: Reusable components
+- `/src/firebase`: Firebase configuration
+- `/src/hooks`: Custom hooks
+- `/src/pages`: Application pages
+- `/src/services`: Data services (products, cart, orders)
+- `/src/store`: Global state with Redux Toolkit
+- `/src/types`: TypeScript types
 
-## Licencia
+## License
 
 MIT

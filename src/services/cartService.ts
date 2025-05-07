@@ -1,10 +1,10 @@
 import { Cart } from '../types/cart.types';
 import { Product } from '../types/product.types';
 
-// Mock de servicio para el carrito, utilizando localStorage
+// Mock cart service using localStorage
 export const cartService = {
   /**
-   * Obtener carrito actual
+   * Get current cart
    */
   getCart(): Cart {
     const cartData = localStorage.getItem('cart');
@@ -15,24 +15,24 @@ export const cartService = {
   },
 
   /**
-   * Guardar carrito
+   * Save cart
    */
   saveCart(cart: Cart): void {
     localStorage.setItem('cart', JSON.stringify(cart));
   },
 
   /**
-   * Agregar producto al carrito
+   * Add product to cart
    */
   addToCart(product: Product, quantity: number = 1): Cart {
     const cart = this.getCart();
     const existingItemIndex = cart.items.findIndex(item => item.id === product.id);
 
     if (existingItemIndex >= 0) {
-      // Si el producto ya existe, incrementamos la cantidad
+      // If the product already exists, increase the quantity
       cart.items[existingItemIndex].quantity += quantity;
     } else {
-      // Si no existe, lo agregamos como nuevo item
+      // If it doesn't exist, add it as a new item
       cart.items.push({
         id: product.id,
         product,
@@ -40,17 +40,17 @@ export const cartService = {
       });
     }
 
-    // Recalcular totales
+    // Recalculate totals
     cart.totalItems = cart.items.reduce((total, item) => total + item.quantity, 0);
     cart.totalAmount = cart.items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
-    // Guardar carrito actualizado
+    // Save updated cart
     this.saveCart(cart);
     return cart;
   },
 
   /**
-   * Actualizar cantidad de un producto en el carrito
+   * Update product quantity in cart
    */
   updateItemQuantity(productId: number, quantity: number): Cart {
     const cart = this.getCart();
@@ -60,15 +60,15 @@ export const cartService = {
       if (quantity > 0) {
         cart.items[itemIndex].quantity = quantity;
       } else {
-        // Si la cantidad es 0 o negativa, eliminamos el producto
+        // If the quantity is 0 or negative, remove the product
         cart.items.splice(itemIndex, 1);
       }
 
-      // Recalcular totales
+      // Recalculate totals
       cart.totalItems = cart.items.reduce((total, item) => total + item.quantity, 0);
       cart.totalAmount = cart.items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
-      // Guardar carrito actualizado
+      // Save updated cart
       this.saveCart(cart);
     }
 
@@ -76,14 +76,14 @@ export const cartService = {
   },
 
   /**
-   * Eliminar un producto del carrito
+   * Remove a product from the cart
    */
   removeFromCart(productId: number): Cart {
     return this.updateItemQuantity(productId, 0);
   },
 
   /**
-   * Vaciar el carrito
+   * Empty the cart
    */
   clearCart(): Cart {
     const emptyCart: Cart = { items: [], totalItems: 0, totalAmount: 0 };
