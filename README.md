@@ -36,16 +36,18 @@ npm install
 npm run dev
 ```
 
+## Deployed Version
+
+The application is already deployed and available at:
+[https://store-frontend-sable-ten.vercel.app/](https://store-frontend-sable-ten.vercel.app/)
+
 ## Deployment on Vercel
 
-1. Create an account on [Vercel](https://vercel.com/)
-2. Install the Vercel CLI `npm install -g vercel`
-3. Run `vercel login` and follow the instructions
-4. From the project root, run `vercel`
-5. Configure the environment variables in the Vercel dashboard (from those you have in .env)
-6. To update your application after changes, run `vercel --prod`
+This project is deployed using Vercel. If you want to deploy your own version:
 
-You can also deploy directly by connecting your GitHub repository to Vercel for automatic deployments.
+1. Create an account on [Vercel](https://vercel.com/)
+2. Connect your GitHub repository to Vercel for automatic deployments
+3. Configure the environment variables in the Vercel dashboard (from those you have in .env)
 
 ## Project Structure
 
