@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import { saveOrder } from '../../services/orderService';
 
-// Interfaz para los datos del formulario
+// Interface for form data
 interface CheckoutForm {
   firstName: string;
   lastName: string;
@@ -31,7 +31,7 @@ interface CheckoutForm {
   country: string;
 }
 
-// Estado inicial del formulario
+// Initial form state
 const initialFormState: CheckoutForm = {
   firstName: '',
   lastName: '',
@@ -49,8 +49,8 @@ export default function Checkout() {
   const navigate = useNavigate();
   const toast = useToast();
 
-  // Si el carrito está vacío, redirigir a la página de inicio
-  // Usamos useEffect para evitar problemas con redirecciones durante el render
+  // If the cart is empty, redirect to the home page
+  // We use useEffect to avoid problems with redirects during render
   useEffect(() => {
     if (cart.items.length === 0) {
       navigate('/');
@@ -70,7 +70,7 @@ export default function Checkout() {
     setIsSubmitting(true);
 
     try {
-      // Preparar los datos de la orden
+      // Prepare order data
       const orderData = {
         customerInfo: {
           firstName: form.firstName,
@@ -86,28 +86,28 @@ export default function Checkout() {
         date: new Date(),
       };
 
-      // Guardar la orden en Firebase
+      // Save the order in Firebase
       const orderId = await saveOrder(orderData);
 
-      // Mostrar mensaje de éxito
+      // Show success message
       toast({
-        title: 'Orden completada',
-        description: `Tu pedido #${orderId.substring(0, 8)} ha sido procesado correctamente`,
+        title: 'Order completed',
+        description: `Your order #${orderId.substring(0, 8)} has been processed successfully`,
         status: 'success',
         duration: 5000,
         isClosable: true,
       });
 
-      // Vaciar carrito
+      // Empty cart
       emptyCart();
 
-      // Redirigir a página de confirmación
+      // Redirect to confirmation page
       navigate('/');
     } catch (error) {
-      console.error('Error al procesar el pedido:', error);
+      console.error('Error processing the order:', error);
       toast({
         title: 'Error',
-        description: 'Ocurrió un error al procesar tu pedido. Por favor, intenta nuevamente.',
+        description: 'An error occurred while processing your order. Please try again.',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -182,7 +182,7 @@ export default function Checkout() {
                   />
                 </FormControl>
                 <FormControl isRequired>
-                  <FormLabel>Código Postal</FormLabel>
+                  <FormLabel>Codigo Postal</FormLabel>
                   <Input
                     name="postalCode"
                     value={form.postalCode}
@@ -205,16 +205,16 @@ export default function Checkout() {
                 size="lg"
                 type="submit"
                 isLoading={isSubmitting}
-                loadingText="Procesando..."
+                loadingText="Processing..."
               >
-                Completar Compra
+                Proceder al pago
               </Button>
             </VStack>
           </Box>
 
           <Box>
             <Heading size="md" mb={4}>
-              Resumen del Pedido
+              Resumen del pedido
             </Heading>
             <VStack spacing={4} align="stretch" bg="gray.50" p={6} borderRadius="md">
               {cart.items.map((item) => (

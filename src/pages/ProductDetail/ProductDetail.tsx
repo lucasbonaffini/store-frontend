@@ -10,20 +10,20 @@ import { Product } from '../../types/product.types';
 export default function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { loadProductById, selectedProduct, error } = useProducts();
+  const { selectedProduct, error } = useProducts();
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [productData, setProductData] = useState<Product | null>(null);
   const toast = useToast();
 
-  // Convertir el ID a número
+  // Convert ID to number
   const productId = id ? parseInt(id, 10) : null;
 
-  // Función para cargar el producto
+  // Function to load the product
   const fetchProductDirectly = useCallback(async (numericId: number) => {
     if (isNaN(numericId)) {
-      console.error(`ID de producto inválido: ${numericId}`);
-      setLoadError('ID de producto inválido');
+      console.error(`Invalid product ID: ${numericId}`);
+      setLoadError('Invalid product ID');
       setIsLoading(false);
       return;
     }
@@ -33,11 +33,11 @@ export default function ProductDetailPage() {
       setProductData(product);
       setLoadError(null);
     } catch (err) {
-      console.error('Error al cargar el producto directamente:', err);
-      setLoadError('No se pudo cargar el producto. Por favor, intenta nuevamente.');
+      console.error('Error loading the product directly:', err);
+      setLoadError('Could not load the product. Please try again.');
       toast({
-        title: 'Error al cargar el producto',
-        description: 'Ocurrió un problema al conectar con el servidor',
+        title: 'Error loading the product',
+        description: 'There was a problem connecting to the server',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -47,33 +47,30 @@ export default function ProductDetailPage() {
     }
   }, [toast]);
 
-  // Efecto para iniciar la carga cuando cambia el ID
+  // Effect to start loading when ID changes
   useEffect(() => {
     if (!productId) return;
     
     setIsLoading(true);
     setLoadError(null);
     
-    // Usamos solo un método de carga para evitar condiciones de carrera
+    // We use only one loading method to avoid race conditions
     fetchProductDirectly(productId);
     
     return () => {};
   }, [productId, fetchProductDirectly]);
   
-  // Ya no necesitamos este efecto porque no estamos usando Redux para cargar
-  // El estado se maneja completamente en fetchProductDirectly
-
   const handleGoBack = () => {
-    navigate(-1); // Volver a la página anterior
+    navigate(-1); // Go back to previous page
   };
 
-  // Estado de carga
+  // Loading state
   if (isLoading) {
     return (
       <Container maxW={'7xl'} py={10}>
         <Flex mb={6}>
           <Button leftIcon={<ArrowBackIcon />} onClick={handleGoBack} colorScheme="teal" variant="outline">
-            Volver
+            Back
           </Button>
         </Flex>
         <Skeleton height="500px" />
@@ -81,28 +78,28 @@ export default function ProductDetailPage() {
     );
   }
 
-  // Estado de error
+  // Error state
   if (loadError || (!productData && !selectedProduct)) {
     return (
       <Container maxW={'7xl'} py={10}>
         <Flex mb={6}>
           <Button leftIcon={<ArrowBackIcon />} onClick={handleGoBack} colorScheme="teal" variant="outline">
-            Volver
+            Back
           </Button>
         </Flex>
         <Center flexDirection="column" py={10}>
           <Text color="red.500" fontSize="xl" mb={4}>
-            {loadError || error || 'No se pudo cargar el producto'}
+            {loadError || error || 'Could not load the product'}
           </Text>
           <Button colorScheme="teal" onClick={() => window.location.reload()}>
-            Intentar nuevamente
+            Try again
           </Button>
         </Center>
       </Container>
     );
   }
 
-  // Usamos productData si está disponible, de lo contrario selectedProduct del store
+  // We use productData if available, otherwise selectedProduct from the store
   const displayProduct = productData || selectedProduct;
 
   return (
@@ -110,7 +107,7 @@ export default function ProductDetailPage() {
       <Container maxW={'7xl'}>
         <Flex mb={6}>
           <Button leftIcon={<ArrowBackIcon />} onClick={handleGoBack} colorScheme="teal" variant="outline">
-            Volver
+            Back
           </Button>
         </Flex>
         {displayProduct && <ProductDetailComponent product={displayProduct} />}

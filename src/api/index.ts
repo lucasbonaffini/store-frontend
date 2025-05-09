@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Usamos la API oficial
+// We use the official API
 const API_BASE_URL = 'https://fakestoreapi.com'; 
 
 export const apiClient = axios.create({
@@ -8,27 +8,27 @@ export const apiClient = axios.create({
   headers: {
     'Content-type': 'application/json',
   },
-  // Reducimos el timeout para que falle rápido y podamos usar alternativas
+  // We reduce the timeout to fail quickly and use alternatives
   timeout: 5000
 });
 
-// Interceptor para manejar errores
+// Interceptor to handle errors
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     console.error('API Error:', error);
-    // Log adicional para ayudar con la depuración
+    // Additional logging to help with debugging
     if (error.response) {
-      // La solicitud fue hecha y el servidor respondió con un código de estado
-      // que no está en el rango 2xx
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
       console.error('Error data:', error.response.data);
       console.error('Error status:', error.response.status);
       console.error('Error headers:', error.response.headers);
     } else if (error.request) {
-      // La solicitud fue hecha pero no se recibió respuesta
+      // The request was made but no response was received
       console.error('No response received:', error.request);
     } else {
-      // Algo sucedió en la configuración de la solicitud que desencadenó un error
+      // Something happened in setting up the request that triggered an error
       console.error('Error message:', error.message);
     }
     return Promise.reject(error);

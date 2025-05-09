@@ -59,7 +59,7 @@ const productSlice = createSlice({
   reducers: {
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
-      // Filtrar productos por término de búsqueda
+      // Filter products by search term
       if (action.payload) {
         state.filteredProducts = state.products.filter(product =>
           product.title.toLowerCase().includes(action.payload.toLowerCase())

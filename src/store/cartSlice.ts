@@ -28,7 +28,7 @@ const cartSlice = createSlice({
       state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
       state.totalAmount = state.items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
-      // Guardar en localStorage
+      // Save on localStorage
       cartService.saveCart(state);
     },
     updateQuantity: (state, action: PayloadAction<{ productId: number, quantity: number }>) => {
@@ -39,15 +39,15 @@ const cartSlice = createSlice({
         if (quantity > 0) {
           state.items[itemIndex].quantity = quantity;
         } else {
-          // Si la cantidad es 0 o negativa, eliminamos el producto
+          // If quantity is 0 or negative, remove the item
           state.items.splice(itemIndex, 1);
         }
 
-        // Recalcular totales
+        // Totals recalculation
         state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
         state.totalAmount = state.items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
-        // Guardar en localStorage
+        // Save on localStorage
         cartService.saveCart(state);
       }
     },
@@ -55,11 +55,11 @@ const cartSlice = createSlice({
       const productId = action.payload;
       state.items = state.items.filter(item => item.id !== productId);
 
-      // Recalcular totales
+      // Totals recalculation
       state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
       state.totalAmount = state.items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
-      // Guardar en localStorage
+      // Save on localStorage
       cartService.saveCart(state);
     },
     clearCart: (state) => {
@@ -67,7 +67,7 @@ const cartSlice = createSlice({
       state.totalItems = 0;
       state.totalAmount = 0;
 
-      // Guardar en localStorage
+      // Save on localStorage
       cartService.saveCart(state);
     },
   },

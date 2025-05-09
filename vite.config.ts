@@ -26,7 +26,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
-    // Opciones de optimización para producción
+    // Optimization options for production
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -35,6 +35,6 @@ export default defineConfig({
       },
     },
   },
-  // Manejo de variables de entorno
+  // Environment variables handling
   envPrefix: 'VITE_',
 });
