@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import Layout from './components/layout/Layout/Layout';
 import Home from './pages/Home/Home';
-import ProductDetailPage from './pages/ProductDetail/ProductDetail';
+import ProductDetailPage from './pages/ProductDetail/ProductDetailPage';
 import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 
